@@ -22,7 +22,7 @@ import com.team3.healthcare.services.AccountService;
 public class RegisterController {
 	@Autowired
 	private AccountService accountService;
-	
+
 	@Autowired
 	private AccountRoleService accountRoleService;
 
@@ -30,27 +30,23 @@ public class RegisterController {
 	public ResponseEntity<?> registerNewUser(@RequestBody RegisterRequestPayload payload) {
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 		String encodedPwd = pwdEncoder.encode(payload.getPassword());
-		
+
 		Account account = new Account(payload.getUsername(), encodedPwd);
 
 		Set<String> strRoles = payload.getRoles();
 		Set<AccountRole> roles = new HashSet<>();
-		
+
 		if (strRoles == null) {
 			throw new RuntimeException("Error: Role is not found.");
 		} else {
 			strRoles.forEach(role -> {
 				switch (role) {
-				case "ROLE_ADMIN_ROOT":
-					AccountRole adminRoot = accountRoleService.getAccountRoleByName("ROLE_ADMIN_ROOT");
-					roles.add(adminRoot);
-					break;
 				case "ROLE_ADMIN":
 					AccountRole admin = accountRoleService.getAccountRoleByName("ROLE_ADMIN");
 					roles.add(admin);
 					break;
-				case "ROLE_USER":
-					AccountRole user = accountRoleService.getAccountRoleByName("ROLE_USER");
+				case "ROLE_CUSTOMER":
+					AccountRole user = accountRoleService.getAccountRoleByName("ROLE_CUSTOMER");
 					roles.add(user);
 					break;
 				default:

@@ -27,25 +27,41 @@ public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
-	
+
 	@Column(name = "password", nullable = false)
 	private String password;
-	
+
 	@Column(name = "firstname", nullable = true)
 	private String firstName;
-	
+
 	@Column(name = "lastname", nullable = true)
 	private String lastName;
 
+	@Column(name = "gender", nullable = true)
+	private String gender;
+
+	@Column(name = "birthday", nullable = true)
+	private String birthday;
+
+	@Column(name = "citizenid", nullable = true)
+	private String citizenId;
+
+	@Column(name = "avatar", nullable = true)
+	private String avatar;
+
+	@Column(name = "phone", nullable = true)
+	private String phone;
+
+	@Column(name = "email", nullable = true)
+	private String email;
+
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "account_role", 
-				joinColumns = @JoinColumn(name = "account_id"), 
-				inverseJoinColumns = @JoinColumn(name = "role_id")) 
+	@JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<AccountRole> accountRole = new HashSet<>();
-	
+
 	public Account() {
 		super();
 	}
@@ -94,6 +110,54 @@ public class Account implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getCitizenId() {
+		return citizenId;
+	}
+
+	public void setCitizenId(String citizenId) {
+		this.citizenId = citizenId;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<AccountRole> getAccountRole() {

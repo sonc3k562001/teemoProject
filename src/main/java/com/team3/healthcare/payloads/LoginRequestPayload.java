@@ -8,7 +8,7 @@ public class LoginRequestPayload implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8551487877616925475L;
-	
+
 	private String username;
 	private String password;
 

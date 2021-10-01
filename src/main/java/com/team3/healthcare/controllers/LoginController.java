@@ -36,18 +36,28 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> doLogin(@RequestBody LoginRequestPayload payload) throws Exception {
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(payload.getUsername(), payload.getPassword()));
-		
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(payload.getUsername(), payload.getPassword()));
+
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwtToken = tokenManager.generateJwtToken(authentication);
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 		String username = userDetails.getUsername();
+		String firstName = userDetails.getFirstName();
+		String lastName = userDetails.getLastName();
+		String gender = userDetails.getGender();
+		String birthday = userDetails.getBirthday();
+		String citizenId = userDetails.getCitizenId();
+		String avatar = userDetails.getAvatar();
+		String phone = userDetails.getPhone();
+		String email = userDetails.getEmail();
+
 		List<String> permission = userDetails.getAuthorities().stream().map(r -> r.getAuthority())
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(new LoginResponseDto(jwtToken, username, permission));
+		return ResponseEntity.ok(new LoginResponseDto(jwtToken, username, firstName, lastName, gender, birthday,
+				citizenId, avatar, phone, email, permission));
 	}
 }

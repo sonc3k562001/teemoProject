@@ -14,11 +14,11 @@ public class TestController {
 	public String testAll() {
 		return "Test All.";
 	}
-	
-	@GetMapping("/user")
-	@PreAuthorize("hasRole('USER')")
-	public String testUser() {
-		return "Test User.";
+
+	@GetMapping("/customer")
+	@PreAuthorize("hasRole('ROLE_CUSTOMER')")
+	public String testCustomer() {
+		return "Test Customer.";
 	}
 
 	@GetMapping("/admin")

@@ -9,7 +9,7 @@ public class RegisterRequestPayload implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -496739729791562307L;
-	
+
 	private String username;
 	private String password;
 	private Set<String> roles;

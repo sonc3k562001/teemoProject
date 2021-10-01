@@ -41,7 +41,7 @@ public class AccountRole implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getPermission() {
 		return permission;
 	}
@@ -49,5 +49,5 @@ public class AccountRole implements Serializable {
 	public void setPermission(String permission) {
 		this.permission = permission;
 	}
-	
+
 }

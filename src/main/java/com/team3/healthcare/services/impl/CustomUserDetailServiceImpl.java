@@ -30,35 +30,7 @@ public class CustomUserDetailServiceImpl implements CustomUserDetailService {
 		if (account == null) {
 			throw new UsernameNotFoundException("User '" + username + "' not found.");
 		}
-		
+
 		return UserDetailsImpl.build(account);
 	}
-
-	/*find user exist or not before register*/
-//	@Override
-//	public AccountDto getUserByUsername(String username) {
-//		Account account = accountService.findByUsername(username);
-//		AccountRole accountRole = accountRoleService.getAccountRoleById(account.getRoleId());
-//		Set<String> roles = new HashSet<>();
-//		roles.add(accountRole.getPermission());
-//
-//		AccountDto accountDto = new AccountDto();
-//
-//		accountDto.setUsername(account.getUsername());
-//		accountDto.setPassword(account.getPassword());
-//		accountDto.setPermission(roles);
-//
-//		return accountDto;
-//	}
-//
-//	@Override
-//	public void registerAccount(RegisterRequestPayload payload) {
-//		Account account = new Account();
-//
-//		account.setUsername(payload.getUsername());
-//		account.setPassword(passwordEncoder.encode(payload.getPassword()));
-//		account.setRoleId(payload.getRoleId());
-//
-//		accountService.registerAccount(account);
-//	}
 }

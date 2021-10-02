@@ -53,11 +53,12 @@ public class LoginController {
 		String avatar = userDetails.getAvatar();
 		String phone = userDetails.getPhone();
 		String email = userDetails.getEmail();
+		String address = userDetails.getEmail();
 
 		List<String> permission = userDetails.getAuthorities().stream().map(r -> r.getAuthority())
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(new LoginResponseDto(jwtToken, username, firstName, lastName, gender, birthday,
-				citizenId, avatar, phone, email, permission));
+				citizenId, avatar, phone, email, address, permission));
 	}
 }

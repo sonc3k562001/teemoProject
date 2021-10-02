@@ -20,10 +20,12 @@ public class LoginResponseDto implements Serializable {
 	private String avatar;
 	private String phone;
 	private String email;
+	private String address;
 	private List<String> permission;
 
 	public LoginResponseDto(String token, String username, String firstName, String lastName, String gender,
-			String birthday, String citizenId, String avatar, String phone, String email, List<String> permission) {
+			String birthday, String citizenId, String avatar, String phone, String email, String address,
+			List<String> permission) {
 		super();
 		this.token = token;
 		this.username = username;
@@ -35,6 +37,7 @@ public class LoginResponseDto implements Serializable {
 		this.avatar = avatar;
 		this.phone = phone;
 		this.email = email;
+		this.address = address;
 		this.permission = permission;
 	}
 
@@ -112,6 +115,14 @@ public class LoginResponseDto implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public List<String> getPermission() {

@@ -32,12 +32,23 @@ public class RegisterController {
 		String encodedPwd = pwdEncoder.encode(payload.getPassword());
 
 		Account account = new Account(payload.getUsername(), encodedPwd);
+		
+		account.setFirstName(payload.getFirstName());
+		account.setLastName(payload.getFirstName());
+		account.setGender(payload.getGender());
+		account.setCitizenId(payload.getCitizenId());
+		account.setAvatar(payload.getAvatar());
+		account.setBirthday(payload.getBirthday());
+		account.setPhone(payload.getPhone());
+		account.setEmail(payload.getEmail());
+		account.setAddress(payload.getAddress());
 
 		Set<String> strRoles = payload.getRoles();
 		Set<AccountRole> roles = new HashSet<>();
 
-		if (strRoles == null) {
-			throw new RuntimeException("Error: Role is not found.");
+		if (strRoles.isEmpty()) {
+			AccountRole commonUser = accountRoleService.getAccountRoleByName("ROLE_CUSTOMER");
+			roles.add(commonUser);
 		} else {
 			strRoles.forEach(role -> {
 				switch (role) {

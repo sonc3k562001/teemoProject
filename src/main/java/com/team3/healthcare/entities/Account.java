@@ -58,6 +58,9 @@ public class Account implements Serializable {
 	@Column(name = "email", nullable = true)
 	private String email;
 
+	@Column(name = "address", nullable = true)
+	private String address;
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<AccountRole> accountRole = new HashSet<>();
@@ -160,6 +163,14 @@ public class Account implements Serializable {
 		this.email = email;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Set<AccountRole> getAccountRole() {
 		return accountRole;
 	}
@@ -167,5 +178,4 @@ public class Account implements Serializable {
 	public void setAccountRole(Set<AccountRole> accountRole) {
 		this.accountRole = accountRole;
 	}
-
 }

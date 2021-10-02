@@ -30,6 +30,7 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 	private String avatar;
 	private String phone;
 	private String email;
+	private String address;
 
 	@JsonIgnore
 	private String password;
@@ -37,7 +38,7 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserDetailsImpl(Long id, String username, String firstName, String lastName, String gender, String birthday,
-			String citizenId, String avatar, String phone, String email, String password,
+			String citizenId, String avatar, String phone, String email, String address, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.id = id;
@@ -50,6 +51,7 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 		this.avatar = avatar;
 		this.phone = phone;
 		this.email = email;
+		this.address = address;
 		this.password = password;
 		this.authorities = authorities;
 	}
@@ -60,7 +62,8 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 
 		return new UserDetailsImpl(account.getId(), account.getUsername(), account.getFirstName(),
 				account.getLastName(), account.getGender(), account.getBirthday(), account.getCitizenId(),
-				account.getAvatar(), account.getPhone(), account.getEmail(), account.getPassword(), grantedAuthorities);
+				account.getAvatar(), account.getPhone(), account.getEmail(), account.getAddress(),
+				account.getPassword(), grantedAuthorities);
 	}
 
 	@Override
@@ -99,6 +102,10 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public String getAddress() {
+		return address;
 	}
 
 	@Override

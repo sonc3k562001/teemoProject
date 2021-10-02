@@ -1,19 +1,18 @@
 package com.team3.healthcare.services.impl;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.team3.healthcare.entities.Account;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.team3.healthcare.entities.Account;
-
-public class UserDetailsImpl implements UserDetails, Serializable {
+public class UserDetailsImpl implements UserDetails {
 
 	/**
 	 * 

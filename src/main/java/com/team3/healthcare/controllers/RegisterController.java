@@ -43,28 +43,10 @@ public class RegisterController {
 		account.setEmail(payload.getEmail());
 		account.setAddress(payload.getAddress());
 
-		Set<String> strRoles = payload.getRoles();
 		Set<AccountRole> roles = new HashSet<>();
+		AccountRole commonUser = accountRoleService.getAccountRoleByName("ROLE_CUSTOMER");
+		roles.add(commonUser);
 
-		if (strRoles.isEmpty()) {
-			AccountRole commonUser = accountRoleService.getAccountRoleByName("ROLE_CUSTOMER");
-			roles.add(commonUser);
-		} else {
-			strRoles.forEach(role -> {
-				switch (role) {
-				case "ROLE_ADMIN":
-					AccountRole admin = accountRoleService.getAccountRoleByName("ROLE_ADMIN");
-					roles.add(admin);
-					break;
-				case "ROLE_CUSTOMER":
-					AccountRole user = accountRoleService.getAccountRoleByName("ROLE_CUSTOMER");
-					roles.add(user);
-					break;
-				default:
-					break;
-				}
-			});
-		}
 		account.setAccountRole(roles);
 		accountService.registerAccount(account);
 		return ResponseEntity.ok().body(true);

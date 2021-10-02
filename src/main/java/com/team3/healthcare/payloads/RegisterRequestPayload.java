@@ -1,7 +1,6 @@
 package com.team3.healthcare.payloads;
 
 import java.io.Serializable;
-import java.util.Set;
 
 public class RegisterRequestPayload implements Serializable {
 
@@ -21,14 +20,12 @@ public class RegisterRequestPayload implements Serializable {
 	private String phone;
 	private String email;
 	private String address;
-	private Set<String> roles;
 
 	public RegisterRequestPayload() {
 	}
 
 	public RegisterRequestPayload(String username, String password, String firstName, String lastName, String citizenId,
-			String birthday, String avatar, String gender, String phone, String email, String address,
-			Set<String> roles) {
+			String birthday, String avatar, String gender, String phone, String email, String address) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -41,7 +38,6 @@ public class RegisterRequestPayload implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
-		this.roles = roles;
 	}
 
 	public String getUsername() {
@@ -131,13 +127,4 @@ public class RegisterRequestPayload implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public Set<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<String> roles) {
-		this.roles = roles;
-	}
-
 }

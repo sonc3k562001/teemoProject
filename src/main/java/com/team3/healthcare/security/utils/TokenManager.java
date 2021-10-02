@@ -2,14 +2,16 @@ package com.team3.healthcare.security.utils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.team3.healthcare.services.impl.UserDetailsImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import com.team3.healthcare.services.impl.UserDetailsImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -32,8 +34,13 @@ public class TokenManager implements Serializable {
 
 	public String generateJwtToken(Authentication authentication) {
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		
+		Map<String, Object> claims = new HashMap<>();
+		
+		claims.put("Account", userDetails);
 
-		return Jwts.builder().setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis()))
+		return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername())
+				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + jwtValitity))
 				.signWith(SignatureAlgorithm.HS512, jwtSecretKey).compact();
 	}

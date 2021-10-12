@@ -7,7 +7,9 @@ import com.team3.healthcare.repositories.AccountRepository;
 import com.team3.healthcare.services.AccountService;
 import com.team3.healthcare.services.MailService;
 import com.team3.healthcare.utils.Constant;
+import com.team3.healthcare.utils.RandomString;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,8 +43,9 @@ public class AccountServiceImpl implements AccountService {
 
 		if(account != null) {
 			// step 2: reset this account password with default one
-			String newPwd = Constant.RESET_PASSWORD;
-			String newBcryptPwd = Constant.BCRYPT_RESET_PASSWORD;
+			RandomString random = new RandomString(6);
+			String newPwd = random.nextString();
+			String newBcryptPwd = BCrypt.hashpw(newPwd, BCrypt.gensalt());
 			accountRepo.resetAccountPassword(newBcryptPwd, account.getUsername());
 			// step 3: sending email to this account email with modified password
 			mailService.sendResetPasswordMail(account.getEmail(),

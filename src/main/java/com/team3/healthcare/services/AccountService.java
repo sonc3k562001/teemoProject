@@ -9,4 +9,6 @@ public interface AccountService {
 	public Account findByUsername(String username);
 
 	public void registerAccount(Account account);
+
+	public boolean resetPassword(String username);
 }

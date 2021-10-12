@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team3.healthcare.dtos.LoginResponseDto;
+import com.team3.healthcare.payloads.ForgotPwdPayload;
 import com.team3.healthcare.payloads.LoginRequestPayload;
 import com.team3.healthcare.security.utils.TokenManager;
+import com.team3.healthcare.services.AccountService;
 import com.team3.healthcare.services.CustomUserDetailService;
 import com.team3.healthcare.services.impl.UserDetailsImpl;
 
@@ -33,6 +36,9 @@ public class LoginController {
 
 	@Autowired
 	private TokenManager tokenManager;
+
+	@Autowired
+	private AccountService accountService;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> doLogin(@RequestBody LoginRequestPayload payload) throws Exception {
@@ -60,5 +66,11 @@ public class LoginController {
 
 		return ResponseEntity.ok(new LoginResponseDto(jwtToken, username, firstName, lastName, gender, birthday,
 				citizenId, avatar, phone, email, address, permission));
+	}
+
+	@PostMapping("/forgotpwd")
+	public ResponseEntity<?> forgotPassword(@RequestBody ForgotPwdPayload payload) {
+		boolean result = accountService.resetPassword(payload.getUsername());
+		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 }
